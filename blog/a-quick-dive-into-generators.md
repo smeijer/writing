@@ -3,7 +3,6 @@ description: Generators and what makes them so special.
 tags: code
 date: 2021-04-12
 ---
-
 # A quick dive into generators
 
 I've briefly mentioned generators earlier in my [article about recursion](/articles/three-ways-to-handle-recursion/). Today, I'm going to explain the concept of generators to you, and why I believe that they are an important thing to know. If you haven't read that article, I'd recommend doing so, as this explanation builds upon that one.
