@@ -1,7 +1,9 @@
 ---
 title: Manual Approvals in GitHub Actions
 description: How to use manual approvals in GitHub Actions to wait for a human to approve a release.
-tags: code, devops
+tags:
+  - code
+  - devops
 date: 2023-09-15
 ---
 
