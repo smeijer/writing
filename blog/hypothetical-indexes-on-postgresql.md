@@ -1,7 +1,9 @@
 ---
 draft: true
-description:  Use hypothetical indexes to test the effect of new indexes without building them.
-tags: code, database
+description: Use hypothetical indexes to test the effect of new indexes without building them.
+tags:
+  - code
+  - database
 date: 2024-06-15
 ---
 

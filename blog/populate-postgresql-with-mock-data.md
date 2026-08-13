@@ -1,6 +1,8 @@
 ---
 description: Learn how to efficiently generate and insert realistic mock data into your database.
-tags: code, database
+tags:
+  - code
+  - database
 date: 2024-06-28
 ---
 
