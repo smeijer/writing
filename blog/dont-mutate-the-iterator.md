@@ -5,7 +5,7 @@ tags: code
 date: 2023-07-06
 ---
 
-![](/articles/dont-mutate-the-iterator.png)
+![](_assets/dont-mutate-the-iterator.png)
 
 Or better said, don't mutate the iterator you're iterating over. This is a common mistake that can lead to unexpected results. And yes, despite writing about [mutating] and [not mutating] before, I still [got bitten][twitter thread] by it. So let's take a look at what happened.
 

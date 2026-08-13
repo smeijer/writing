@@ -25,7 +25,7 @@ The "**Environment secrets**" can be used to add secrets that can only be used i
 
 Be sure to click "Save protection rules" when done.
 
-![environments on github](/articles/manual-approvals-in-github-actions-2.png)
+![environments on github](_assets/manual-approvals-in-github-actions-2.png)
 
 ## The Action
 
@@ -61,7 +61,7 @@ jobs:
 
 And now the `release` job will only run after one of the reviewers has approved. Note that any other job still runs, unless you've build in a [dependency](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idneeds) using `needs: [release]`.
 
-![manual approval on github](/articles/manual-approvals-in-github-actions-1.png)
+![manual approval on github](_assets/manual-approvals-in-github-actions-1.png)
 
 ## Only publish the most recent change
 

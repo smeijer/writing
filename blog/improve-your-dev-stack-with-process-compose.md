@@ -15,7 +15,7 @@ And that's exactly what it is. It's a single binary that enables you to define y
 
 Before we set things up, let's take a quick look at an example screen from a bigger project of mine. This is what process-compose looks like:
 
-![process-compose session](/articles/improve-your-dev-stack-with-process-compose-1.png)
+![process-compose session](improve-your-dev-stack-with-process-compose.png)
 
 I like the TUI, but it can be disabled with `-t=false` if that's not your thing. Plus, logs can be tailed in another terminal with `process-compose process logs $process`.
 
