@@ -1,10 +1,11 @@
 ---
-title: Hypothetical Indexes on PostgreSQL
 draft: true
 description:  Use hypothetical indexes to test the effect of new indexes without building them.
 tags: code, database
 date: 2024-06-15
 ---
+
+# Hypothetical Indexes on PostgreSQL
 
 You're having slow queries, and all you know is that it might have something to do with indexes. Maybe you even got an idea of what index might help, but building one and then checking the new performance takes forever.
 

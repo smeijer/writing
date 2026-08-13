@@ -1,9 +1,10 @@
 ---
-title: Typed GraphQL with react-query & graphql-request
 description: Using typed GraphQL queries to easy development and maintain API confidence.
 tags: code
 date: 2021-11-25
 ---
+
+# Typed GraphQL with react-query & graphql-request
 
 While our front-end at [MagicBell](https://magicbell.io/) is a React/TypeScript application, we write our back-end in Ruby. This article explains how I've connected our client to the back-end and how we guard against breaking API changes.
 

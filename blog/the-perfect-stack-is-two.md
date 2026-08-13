@@ -1,9 +1,10 @@
 ---
-title: The Perfect Stack Is Two
 description: Stop chasing one framework to do it all. The perfect stack is two.
 tags: thoughts
 date: 2025-10-19
 ---
+
+# The Perfect Stack Is Two
 
 Someone asked me why I use different stacks for my landing page and for my app. He was confident a proper meta-framework must exist that can do both.
 

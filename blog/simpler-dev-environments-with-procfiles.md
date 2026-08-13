@@ -1,9 +1,10 @@
 ---
-title: Simpler Dev Environments with Procfiles
 description: Use Procfiles to turn multiple startup commands into a single one.
 tags: tooling
 date: 2022-06-01
 ---
+
+# Simpler Dev Environments with Procfiles
 
 Throughout the time, I've tried a number of different ways to manage my development environment. From Make files, to [PM2][1] and [Tmux][2].
 

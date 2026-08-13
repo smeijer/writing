@@ -1,9 +1,10 @@
 ---
-title: Populate PostgreSQL with Mock Data
 description: Learn how to efficiently generate and insert realistic mock data into your database.
 tags: code, database
 date: 2024-06-28
 ---
+
+# Populate PostgreSQL with Mock Data
 
 In the world of testing and debugging database query performance, having a rich dataset to work with is crucial. Working with production is - for good reasons - not always an option, so this is where mock data comes in. In this article, we will walk through the process of populating your PostgreSQL database with mock data efficiently.
 

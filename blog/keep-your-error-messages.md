@@ -1,10 +1,11 @@
 ---
-title: Keep Your Error Messages
 description: Preserve meaningful error messages in production, stop using tools that strip them.
 tags: code
 date: 2025-11-12
 draft: false
 ---
+
+# Keep Your Error Messages
 
 Some developers still run tools that strip their own error messages in production. That practice makes no sense. Good error messages aren't a debugging luxury, they're a fundamental part of your system's observability. Yet there are libraries that still throw `"Invariant failed"` instead of the message you wrote. Let's look at why that happens and how to avoid it.
 

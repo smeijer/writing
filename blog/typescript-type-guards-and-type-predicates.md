@@ -1,9 +1,10 @@
 ---
-title: TypeScript Type Guards and Type Predicates
 description: How to use Type Guards to narrow types in TypeScript.
 tags: code
 date: 2021-03-22
 ---
+
+# TypeScript Type Guards and Type Predicates
 
 Union types enable us to accept parameters of multiple, different types. Provide either type `x` or `y`. Sometimes, these types aren't 100% compatible. They serve the same goal but have different properties. At a later stage, we might want to run some code based on the exact type. This is where type guards and type predicates come in.
 

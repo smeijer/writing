@@ -1,9 +1,10 @@
 ---
-title: Trivia or Job Interview?
 description: The interview process is broken, I can build, I can't play.
 tags: thoughts
 date: 2021-05-04
 ---
+
+# Trivia or Job Interview?
 
 I've built multiple SaaS, and some are used by multinationals. Yet, I fail miserably at tricky interview questions. In this article, I'm going to show you a few recent questions I got, and share my thoughts.
 

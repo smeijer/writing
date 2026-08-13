@@ -1,9 +1,10 @@
 ---
-title: My Career and Lessons Learned in a Nutshell
 description: How I became as productive as I am.
 tags: thoughts
 date: 2021-03-23
 ---
+
+# My Career and Lessons Learned in a Nutshell
 
 It has now happened a few times that I got asked how I "can be so productive". In this article, I'll tell you my story.
 

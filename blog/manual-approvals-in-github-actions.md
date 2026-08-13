@@ -1,11 +1,12 @@
 ---
-title: Manual Approvals in GitHub Actions
 description: How to use manual approvals in GitHub Actions to wait for a human to approve a release.
 tags:
   - code
   - devops
 date: 2023-09-15
 ---
+
+# Manual Approvals in GitHub Actions
 
 In the world of continuous deployment we like to automate everything, and remove the human factor.  For me, that's not always desired. I like to batch changes in a single release when I know that I'm going to merge more changes during a reasonable timeframe. I also don't always value "approve to merge" the same as "approve to release".
 

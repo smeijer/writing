@@ -1,9 +1,10 @@
 ---
-title: The costs of Optional Chaining
 description: The costs of Optional Chaining in performance and bundle size.
 tags: code
 date: 2019-07-31
 ---
+
+# The costs of Optional Chaining
 
 Now that optional chaining has reached stage 3, it's time for a reevaluation.
 

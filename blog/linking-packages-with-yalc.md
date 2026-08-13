@@ -1,9 +1,10 @@
 ---
-title: Linking Packages with Yalc
 description: Effective package development using Yalc.
 date: 2023-06-17
 tags: tooling
 ---
+
+# Linking Packages with Yalc
 
 As web developers, we often work on projects involving multiple packages or modules, that are under simultaneous development, making it necessary to link them together to test integration. The traditional approach for this uses `npm link`, which creates a symbolic link between the package in development and the global `node_modules` directory. The better way is to use `yalc`.
 

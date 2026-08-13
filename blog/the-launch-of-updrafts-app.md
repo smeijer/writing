@@ -1,9 +1,10 @@
 ---
-title: The launch of Updrafts.app
 description: The launch of Updrafts.app - A Tailwind Studio.
 tags: thoughts
 date: 2020-10-02
 ---
+
+# The launch of Updrafts.app
 
 I recently launched [Tailwind-Studio](https://tailwind-studio.com), which was quickly renamed to [Updrafts.app](https://updrafts.app). In this post, I tell you my story. How I came to the (early) launch, how I experienced the first week, and what I learned from it.
 

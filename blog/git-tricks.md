@@ -1,10 +1,11 @@
 ---
-title: git tricks
 draft: true
 date: 2025-02-07
 description: A collection of git tricks that I've found useful.
 tags: tooling
 ---
+
+# git tricks
 
 Here seems to be an easy solution found here. Adding the file / directory to .gitignore only is not enough, but git will allow you to manually "ignore" changes to a file / directory:
 

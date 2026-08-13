@@ -1,9 +1,10 @@
 ---
-title: Isomorphic Development
 description: Fullstack development, or rather isomorphic development, isn't as easy as they say.
 date: 2023-05-25
 tags: thoughts
 ---
+
+# Isomorphic Development
 
 At first, I wanted to name this post "No, Server Components Don't Make Your Job Easier", but that wouldn't have covered it. It's not server components itself complicating our jobs. It's the isomorphic nature of it. The fact that the same code runs in both server and client, and that they're supposed to bridge the gap between them. Supposed to, because we're not there yet.
 

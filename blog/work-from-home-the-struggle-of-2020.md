@@ -1,9 +1,10 @@
 ---
-title: Work From Home; The Struggle of 2020
 description: Working from Home isn't the same anymore.
 tags: thoughts
 date: 2020-11-03
 ---
+
+# Work From Home; The Struggle of 2020
 
 Over the past few weeks, I've seen numerous people reaching out for mental support. Sometimes directly, often hidden under a question asking about how to maintain work/life balance when working from home with young children.
 

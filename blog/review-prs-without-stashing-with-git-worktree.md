@@ -1,9 +1,10 @@
 ---
-title: Review PRs without stashing, with git worktree
 description: Work on multiple branches at once without stashing or cloning.
 tags: tooling
 date: 2025-10-13
 ---
+
+# Review PRs without stashing, with git worktree
 
 You're mid-feature, server running, uncommitted changes everywhere. A teammate opens a pull request you want to run locally. Or you just wrote tests for your feature and want to run them on `main`. Either way, switching context is a pain.
 

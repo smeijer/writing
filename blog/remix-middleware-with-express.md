@@ -1,10 +1,11 @@
 ---
-title: Remix Middleware using Express
 draft: true
 description: How to reduce boilerplate in your Remix loaders using Express middleware.
 tags: code
 date: 2021-06-20
 ---
+
+# Remix Middleware using Express
 
 -- path-to-regexp
 

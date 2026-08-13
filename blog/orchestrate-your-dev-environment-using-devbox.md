@@ -1,9 +1,10 @@
 ---
-title: Orchestrate your Dev Environment using Devbox
 description: Use Devbox to manage your portable, isolated, dev environment, on any machine.
 tags: tooling
 date: 2024-05-02
 ---
+
+# Orchestrate your Dev Environment using Devbox
 
 I've written about [process-compose] a while back, and [Devbox] neatly complements that workflow. If you haven't read that post yet, I recommend to do so before or after this post. Devbox is the missing piece in having a Docker like experience, for local dev environments. Where process-compose orchestrates services like docker-compose, Devbox isolates environments like the Docker containers, but without the cost of virtualization.
 

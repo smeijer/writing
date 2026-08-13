@@ -1,9 +1,10 @@
 ---
-title: Typescript Type Assertions
 description: How to use Type Assertions to narrow types in TypeScript.
 tags: code
 date: 2021-09-07
 ---
+
+# Typescript Type Assertions
 
 Type assertions look a lot like of [type guards](/articles/typescript-type-guards-and-type-predicates/), with the exception that they don't need to be embedded in an `if` statement.
 

@@ -1,9 +1,10 @@
 ---
-title: Stop mutating in map, reduce and forEach
 description: Functional methods and side effects don't play well together.
 tags: code
 date: 2020-12-14
 ---
+
+# Stop mutating in map, reduce and forEach
 
 There are plenty of articles that will try to convince you that you should use the `map`, `filter` and `reduce` methods. Less of them mention `forEach`, and not many of them mention the more traditional for loops as serious alternative. Or when to use `map` over `reduce` or especially `forEach`.
 

@@ -1,9 +1,10 @@
 ---
-title: Three ways to handle recursion
 description: Walking down a tree using a function, loop or generator.
 tags: code
 date: 2021-04-10
 ---
+
+# Three ways to handle recursion
 
 This is a follow-up post on [You might not need recursion](/articles/you-might-not-need-recursion/). In this article, I'm going to show you three different ways to convert a Tree data structure, to a flat list while maintaining a reference to the parent.
 

@@ -1,10 +1,11 @@
 ---
-title: Decorators without the magic — HOFs, the standard, and TS legacy
 description: Start with HOFs/HOCs you already know, then see how ECMAScript decorators solve it, what TypeScript’s experimental decorators did differently, and how to write one decorator that works in both worlds.
 tags: code
 date: 2025-10-29
 draft: true
 ---
+
+# Decorators without the magic — HOFs, the standard, and TS legacy
 
 If decorators ever felt like magic, it's time to look behind the curtains. It's just function wrapping. If you’ve written a higher‑order function or a React HOC, you already understand decorators. The rest is syntax and timing.
 

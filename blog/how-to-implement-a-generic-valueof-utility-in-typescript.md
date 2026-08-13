@@ -1,9 +1,10 @@
 ---
-title: How to implement a generic `ValueOf<T>` helper type in TypeScript
 description:  A typescript `valueof` implementation similar to `keyof`
 tags: code
 date: 2020-12-18
 ---
+
+# How to implement a generic `ValueOf<T>` helper type in TypeScript
 
 [Sudhanshu](https://twitter.com/__tsuki__42) asked this interesting typescript question yesterday on the [KCD Discord](https://kcd.im/discord). The question was:
 > _Is it possible to restrict the type of a variable, to the values of a plain object._

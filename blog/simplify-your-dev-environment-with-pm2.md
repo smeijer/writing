@@ -1,9 +1,10 @@
 ---
-title: Simplify your Dev Environment with PM2
 description: Use PM2 to turn multiple startup commands into a single one.
 tags: tooling
 date: 2021-03-21
 ---
+
+# Simplify your Dev Environment with PM2
 
 Do you recognise that scenario were starting a project in dev mode, requires multiple actions to be taken? I think we all have or had those cases. Start a local database, start a node app, and maybe even start some file watchers to watch and compile css files or other assets.
 

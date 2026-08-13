@@ -1,9 +1,10 @@
 ---
-title: Don't skip elements with array destructuring
 description: Prefer [].slice(2) over [,,rest]
 tags: code
 date: 2020-12-22
 ---
+
+# Don't skip elements with array destructuring
 
 > *"Did you know that you can use an empty 'placeholder' comma, to skip elements when destructuring arrays?"*
 

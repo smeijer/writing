@@ -1,9 +1,10 @@
 ---
-title: Handling POST requests in Next.js getServerSideProps
 description: How to handle POST requests in Next.js getServerSideProps.
 tags: code
 date: 2021-09-10
 ---
+
+# Handling POST requests in Next.js getServerSideProps
 
 The documentation pages of Next.js list [`getServerSideProps`](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) under "data fetching", and for any kind of data mutations, they'll point you to the [`api routes`](https://nextjs.org/docs/api-routes/introduction). I'm here to tell you, that there is another way!
 

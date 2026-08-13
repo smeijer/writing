@@ -1,9 +1,10 @@
 ---
-title: Don't stop Mutating
 description: Mutating objects is fine, sometimes preferred.
 tags: code
 date: 2020-12-16
 ---
+
+# Don't stop Mutating
 
 I recently came across a [tweet by Simon Høiberg][6] that basically forbids you to use `delete`. The reason for this? *"You don't want to mutate the existing object. It leads to inconsistent and unpredictable behavior"*
 

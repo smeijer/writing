@@ -1,9 +1,11 @@
 ---
-title: Conflicted
 description: A rambling about recent events in my life.
 tags: thoughts
 date: 2022-03-28
 ---
+
+# Conflicted
+
 A LOT has happened over the last few months. And yet, I haven't written about any of it. I wanted to, but I've been unable to find the time, the words, or maybe mostly the right mood.
 
 I wanted to write about [my adventure with Kent C. Dodds][1]. We've created one of the first, if not the first, full-fletched website using Remix. It was lots of fun. Little did I know that the animations and transitions that I implemented for Kent [would lead][3] to my current position at MagicBell.

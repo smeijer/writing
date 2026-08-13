@@ -1,9 +1,10 @@
 ---
-title: You might not need recursion
 description: Flat loops as an alternative for complex recursive functions.
 tags: code
 date: 2021-04-09
 ---
+
+# You might not need recursion
 
 A recursive function repeatedly calls itself until a condition is met that makes it stop. Recursive functions are tricky to get right. They require a solid exit strategy and will result in an error telling you that the `Maximum call stack size exceeded` if you mess up.
 

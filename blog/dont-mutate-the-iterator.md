@@ -1,9 +1,10 @@
 ---
-title: Don't mutate the iterator
 description: Don't mutate the iterator you're iterating over.
 tags: code
 date: 2023-07-06
 ---
+
+# Don't mutate the iterator
 
 ![](_assets/dont-mutate-the-iterator.png)
 

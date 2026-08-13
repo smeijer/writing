@@ -1,10 +1,11 @@
 ---
-title: The Internal Folder Pattern
 description: Separate public APIs from implementation details without TypeScript tricks by adopting an `internal` folder, inspired by Go.
 tags: code
 date: 2025-10-29
 draft: true
 ---
+
+# The Internal Folder Pattern
 
 We leak too much. Utilities seep into places they shouldn't, private helpers get imported across the app, and refactors stall because "something depends on it somewhere". We try to fix it with barrels, `export type`, path aliases, or complex visibility schemes in TypeScript. None of that draws a clear architectural boundary.
 

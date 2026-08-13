@@ -1,9 +1,10 @@
 ---
-title: Improve your Dev Stack with process-compose
 description: Use process-compose to manage your dev services.
 tags: tooling
 date: 2024-04-11
 ---
+
+# Improve your Dev Stack with process-compose
 
 As developers, we often run multiple services to work on a single project. I've managed my projects with [makefiles], [PM2], [Tmux], [Procfiles], and many other solutions. They all had their pros and cons, but none of them felt like the perfect solution. I always kept looking for a _"docker (compose) for development environments"_. The problem with docker itself is that it works fine for a database, but not for something like `go` or `node` services, where you want to restart the service on file changes, and use hot reloading.
 

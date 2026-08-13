@@ -1,10 +1,11 @@
 ---
-title: How I got a job offer from a funded startup
 description: How I got an exciting job offer, that I had to decline.
 tags: thoughts
 
 date: 2021-05-02
 ---
+
+# How I got a job offer from a funded startup
 
 I recently got an exciting job offer, that I had to decline. This article is my attempt to share how it came to that, and what I've learned from it.
 

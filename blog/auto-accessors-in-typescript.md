@@ -1,10 +1,11 @@
 ---
-title: "Auto accessors in TypeScript — less boilerplate, real properties"
 description: "`accessor` gives you a property with an auto‑generated getter/setter and a private backing field. Cleaner than fields, lighter than hand‑written accessors, and ready for decorators."
 tags: code
 date: 2025-10-29
 draft: true
 ---
+
+# Auto accessors in TypeScript — less boilerplate, real properties
 
 TypeScript 4.9 added auto accessors. You write `accessor name: string`, and TypeScript gives you a real property: a getter, a setter, and a private backing field. Same usage as a field at the call site, but more capability.
 

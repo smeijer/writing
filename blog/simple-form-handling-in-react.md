@@ -1,9 +1,10 @@
 ---
-title: How to handle forms in React, the alternative approach
 description: Form handling in React, without react controlling everything!
 tags: code
 date: 2021-01-04
 ---
+
+# How to handle forms in React, the alternative approach
 
 When I first started with React, I was relearning how to manage forms again. `Controlled`, or `uncontrolled`. Use `defaultValue` instead of `value`, bind `onChange` handlers, and manage the state in `redux`, or more recently; should I manage the state with `useState` or `useReducer`?
 
