@@ -19,7 +19,7 @@ Turns out, this is quite doable. Not that hard even. And you already know the fu
 
 ## Roles: Give the Models a Job
 
-Subagent sounds fancy. But it's another run of the same kind of agent you're already working with. The main agent hands it a task, it does the work, and returns a result. With [pi-subagents](https://github.com/tintinweb/pi-subagents), you can also ask for one yourself through an `@mention`.
+Subagent sounds fancy. But it's just another run of the same kind of agent you're already working with. The main agent hands it a task, it does the work, and returns a result. With [pi-subagents](https://github.com/tintinweb/pi-subagents), you can also ask for one yourself through an `@mention`.
 
 What makes the `@mention` extra useful is the custom profile behind it. Without that, I'd mostly be asking another agent to do the same thing as the main one. With it, `@engineer` gets instructions for implementation, while `@designer` gets instructions for the interface. Each can have its own model, thinking level, and available tools.
 
@@ -36,7 +36,13 @@ mkdir -p ~/.pi/agent/agents
 
 Restart or `/reload` Pi after installing.
 
-Like almost anything with LLM's, an agent profile is a simple markdown file:
+First, list the model IDs available to you:
+
+```shell
+pi --list-models
+```
+
+Now let's create our first (sub)agent. Like almost anything with LLMs, an agent profile is a simple markdown file. This profile uses `deepseek/deepseek-v4-flash` because that's the model I chose for this role. It's only an example, not a recommendation. Replace it with an available `provider/modelId` from the list. Save it as `~/.pi/agent/agents/engineer.md`.
 
 ```markdown
 ---
@@ -53,25 +59,31 @@ Run the relevant tests. Report what changed, what passed, and blockers.
 Do not fix adjacent issues just because you noticed them.
 ```
 
-Save it as `engineer.md` in  `~/.pi/agent/agents/`. Replace the model with a `provider/modelId` you have authenticated in Pi. It's a choice you make for the role, not a recommendation here. Check `/agents` → Agent types to confirm which model it resolves to.
+Let's go through the YAML frontmatter:
 
-Now I can type:
+- `name` is the thing you can mention. In this case, `@engineer`. I recommend keeping it in sync with the filename.
+- `model` picks the provider and model for this role, using `provider/modelId`.
+- `tools` limits the built-in tools the engineer can use.
+- `prompt_mode: append` adds these instructions to Pi's normal agent prompt instead of replacing it.
+- `inherit_context: false` starts the agent without the entire parent conversation. It still gets its own instructions and the project context that applies to it.
+
+Trigger `/reload` after saving this file, then open `/agents` → Agent types. You should see `engineer` and the model Pi resolved for it. As an optional check, type `@eng` and mention completion should suggest `@engineer`.
+
+After this, I can type:
 
 ```text
 @engineer Add tests for the CSV parser's empty-input behavior.
 ```
 
-For a designer, create `designer.md` using the same format. Change `name` to `designer`, describe its presentation work, and replace the body with instructions to own layout, interaction, and component interfaces. Choose its model separately.
+For a designer, create `designer.md` using the same format. Change `name` to `designer`, pick a model that's better suited for UI work (for example `openai-codex/gpt-6-astra`), describe its presentation work, and replace the body with instructions to own layout, interaction, and component interfaces. Choose its model separately.
 
-I talk to `@engineer` or `@designer`. The assignments live in files, where I can change them without changing how I ask for work.
+Instead of switching models, I talk to `@engineer` or `@designer`. The result is the same, it's just the chat that feels more natural. Bonus point is that there's no context handover, without me needing to clear my session trough `/new` all the time.
 
-I still choose the model. I just choose it per role, instead of per interruption.
+## Tasks: Stop Being the Continue Button
 
-## 2. Tasks: Stop Being the Continue Button
+Roles solved the model-switching problem. They didn't solve the next problem: I still had to tell the agents; "continue".
 
-Roles solved the model-switching problem. They didn't solve the next problem: I still had to tell the agents to continue.
-
-One task finished. There was more work. Back to the prompt.
+Sounds familiar? Some work get's done, but the agent ends with "just say continue and I get that done too". Exhausting. You come back from your coffee break, and that's the message you're running in to. 
 
 [pi-tasks](https://github.com/tintinweb/pi-tasks) adds the missing task list and dependencies:
 
@@ -88,7 +100,7 @@ Create or merge this into `~/.pi/agent/tasks-config.json`:
 }
 ```
 
-Restart Pi after saving the config.
+Restart or `/reload` Pi after saving the config.
 
 Both settings matter. Tasks default to session storage, with cascade disabled. Project storage gives the CTO and main agent the same board at `.pi/tasks/tasks.json`. Otherwise, the planner can create tasks the main agent cannot see.
 
