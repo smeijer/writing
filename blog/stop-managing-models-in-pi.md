@@ -69,7 +69,7 @@ One task finished. There was more work. Back to the prompt.
 pi install npm:@tintinweb/pi-tasks
 ```
 
-Restart Pi again. Then create or merge this into `~/.pi/agent/tasks-config.json`:
+Create or merge this into `~/.pi/agent/tasks-config.json`:
 
 ```json
 {
@@ -77,6 +77,8 @@ Restart Pi again. Then create or merge this into `~/.pi/agent/tasks-config.json`
   "autoCascade": true
 }
 ```
+
+Restart Pi after saving the config.
 
 Both settings matter. Tasks default to session storage, with cascade disabled. Project storage gives the CTO and main agent the same board at `.pi/tasks/tasks.json`. Otherwise, the planner can create tasks the main agent cannot see.
 
@@ -160,6 +162,8 @@ I also narrow the engineer's `tools` line once tasks are installed:
 ```yaml
 tools: read, write, edit, bash, grep, find, ls, ext:pi-tasks/TaskCreate, ext:pi-tasks/TaskList
 ```
+
+Using `ext:` makes extension access an explicit allowlist, so keep any other extension tools your engineer needs on that line.
 
 That lets it record follow-up findings without handing it execution control. Append this instruction to the engineer's body: “File unrelated findings with TaskCreate as pending tasks without agentType; do not fix them.” The main agent decides what gets scheduled next.
 
