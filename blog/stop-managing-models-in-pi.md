@@ -5,7 +5,7 @@ tags: tooling
 draft: true
 ---
 
-# Stop Managing Models, Give Pi a Team
+# Give Pi a Team
 
 I kept using a single model in [Pi](https://pi.dev), even tho I knew it wasn't the right choice for everything. Not because switching models is hard. Because deciding when to switch is another thing to do while I'm trying to get something built.
 
@@ -15,7 +15,7 @@ Usually, no. I'd keep going with whatever was already selected.
 
 The thing I wanted wasn't a better model picker. I wanted to ask an engineer to implement something, or a designer to work on the interface, without remembering which model I'd assigned to each job.
 
-## 1. Give the models a job
+## 1. Roles: Give the Models a Job
 
 That's where [pi-subagents](https://github.com/tintinweb/pi-subagents) comes in. It adds agents with their own instructions, tools, and model selection. Assuming you already have Pi and an authenticated model, install it with:
 
@@ -43,7 +43,7 @@ Run the relevant tests. Report what changed, what passed, and blockers.
 Do not fix adjacent issues just because you noticed them.
 ```
 
-That model is a configured choice, not a recommendation. Replace it with a `provider/modelId` you have authenticated in Pi. Check `/agents` → Agent types to confirm what it resolves to.
+Replace the model with a `provider/modelId` you have authenticated in Pi. It's a choice you make for the role, not a recommendation here. Check `/agents` → Agent types to confirm which model it resolves to.
 
 Now I can type:
 
@@ -55,9 +55,9 @@ For a designer, create `designer.md` using the same format. Change `name` to `de
 
 I talk to `@engineer` or `@designer`. The assignments live in files, where I can change them without changing how I ask for work.
 
-This doesn't select the best model automatically. I still make that decision. I just make it once per role, instead of once per interruption.
+I still choose the model. I just choose it per role, instead of per interruption.
 
-## 2. Stop being the continue button
+## 2. Tasks: Stop Being the Continue Button
 
 Roles solved the model-switching problem. They didn't solve the next problem: I still had to tell the agents to continue.
 
@@ -84,13 +84,13 @@ Both settings matter. Tasks default to session storage, with cascade disabled. P
 
 These are global defaults. `/tasks` → Settings can override them for a project, saving to `.pi/tasks-config.json`.
 
-The important tools are `TaskCreate`, `TaskUpdate`, and `TaskExecute`. Create a task with an `agentType`, connect it to prerequisites with `addBlockedBy`, and execute the ready tasks. Auto-cascade starts their dependents as prerequisites complete.
+The wiring is straightforward: `TaskCreate` assigns an `agentType`, `TaskUpdate` connects prerequisites through `addBlockedBy`, and `TaskExecute` starts ready tasks. Auto-cascade starts dependent tasks when their prerequisites have completed.
 
 It's not a background company that keeps inventing work. It's a dependency graph that keeps moving through work you've already described.
 
-## 3. Give planning its own role
+## 3. Planning: Give the Engineer Less to Read
 
-I don't want to write every task myself either. That's the CTO's job.
+I don't want to write every task myself either. That's the CTO's job. It inspects the repo, breaks the goal into tasks, and gives each one exact files and the context needed to do the work. The engineer shouldn't need our whole conversation to implement one change.
 
 Create `~/.pi/agent/agents/cto.md`:
 
@@ -121,7 +121,7 @@ Assume the worker has not seen this planning conversation.
 
 Again, choose your own authenticated model. The `ext:pi-tasks` selector exposes the installed extension's tools; `disallowed_tools` removes execution and stopping from this role.
 
-That split is deliberate. The CTO plans. The main conversation starts the ready tasks through `TaskExecute`. Auto-cascade handles the dependents when tracked execution completes. Creating tasks, manually marking one completed, or spawning a plain `Agent` doesn't start the cascade.
+The CTO plans; it cannot call `TaskExecute`. The main agent starts the ready tasks through that tool, and auto-cascade handles the dependents when tracked execution completes. Creating tasks, manually marking one completed, or spawning a plain `Agent` doesn't start the cascade.
 
 The task descriptions matter more than the title “CTO”. “Fix CSV importing” isn't a handoff. Something like this is:
 
@@ -134,11 +134,11 @@ Acceptance: add regression tests; existing parser tests still pass.
 
 Those filenames are an example; the planner must use the actual repository. It should split a larger change into several tasks, not send an engineer a whole project with a reassuring title.
 
-Sure, I could break up the work myself. But the CTO has already inspected the repo, worked through the plan, and narrowed down which files each task may touch. The engineer gets the essence of what it needs to do, not our whole discussion and every option we decided against. That's the part I don't want to keep doing by hand.
+Sure, I could prepare those handoffs myself. But that's the part I don't want to keep doing by hand. The engineer needs the decisions we made, not every option we decided against.
 
-With `prompt_mode: append`, the engineer inherits system instructions and project conventions. With `inherit_context: false`, it doesn't inherit the entire parent chat. Cascaded tasks also receive their prerequisites' stored results. Focused context, not no context.
+With `prompt_mode: append`, the engineer keeps system instructions and project conventions alongside its role instructions. With `inherit_context: false`, it doesn't inherit the entire parent chat. Cascaded tasks also receive their prerequisites' stored results. _Focused context, not no context._
 
-## 4. Keep the main conversation out of implementation
+## 4. Routing: Keep the Main Conversation Out of Implementation
 
 The remaining piece is routing. Add this to `~/.pi/agent/AGENTS.md`, preserving your existing instructions:
 
@@ -153,11 +153,11 @@ When the plan returns, use TaskList and TaskGet to inspect it.
 Use TaskExecute for ready pending tasks with agentType set.
 Leave them pending: TaskExecute marks them in_progress.
 Do not also spawn those tasks through Agent.
-Let auto-cascade run dependents. Triage failures and unassigned
-findings; task completion is not proof that tests passed.
+Let auto-cascade run dependents. Review results and test outcomes.
+Triage failures and unassigned findings.
 ```
 
-I also narrow the engineer's `tools` line once tasks are installed:
+For follow-up findings, I also give the engineer limited access to the task board. This part is optional. Once tasks are installed, replace its `tools` line with:
 
 ```yaml
 tools: read, write, edit, bash, grep, find, ls, ext:pi-tasks/TaskCreate, ext:pi-tasks/TaskList
@@ -165,7 +165,7 @@ tools: read, write, edit, bash, grep, find, ls, ext:pi-tasks/TaskCreate, ext:pi-
 
 Using `ext:` makes extension access an explicit allowlist, so keep any other extension tools your engineer needs on that line.
 
-That lets it record follow-up findings without handing it execution control. Append this instruction to the engineer's body: “File unrelated findings with TaskCreate as pending tasks without agentType; do not fix them.” The main agent decides what gets scheduled next.
+Append this instruction to the engineer's body: “File unrelated findings with TaskCreate as pending tasks without agentType; do not fix them.” It can record the finding, but the main agent decides what gets scheduled next.
 
 These instructions are workflow rules, not a security sandbox. File scopes still need review, and an agent with shell access can change files through the shell.
 
@@ -178,12 +178,12 @@ Read the existing implementation and plan the smallest change.
 
 The CTO returns a scoped plan. The main agent starts it. Dependent work follows without me typing “continue” after every task. For an explicit first test, tell the main agent: “Use cto to plan this change, then execute the ready tasks.”
 
-Normal agent completion marks its task completed. The extension doesn't interpret “I'm blocked” in the response or verify acceptance criteria. I still inspect results; an advancing board isn't proof of correct work.
+Normal completion of an agent run through `TaskExecute` marks its task completed. That doesn't mean the tests passed. The extension doesn't interpret “I'm blocked” in the response or verify acceptance criteria, so I still need to inspect the results.
 
-## The part I actually wanted
+## A Team: Not Another Platform
 
-The appeal of [Paperclip](https://paperclip.ing) and [Squad](https://squad.so), for me, is the team-shaped interaction and work that keeps going. This setup gives me that small part inside Pi. It isn't a replacement for everything those products offer.
+What I wanted from tools like [Paperclip](https://paperclip.ing) and [Squad](https://squad.so) was the team and the cascade. Not everything those products offer. Just named roles, scoped work, and tasks that start when their prerequisites are done.
 
-There's no extra orchestration subscription here. Model usage still costs money, and more agents don't make that disappear.
+I can have that inside Pi, without another orchestration subscription. Model usage still costs money. I still review the changes.
 
-I still read the results and review the changes. But model assignments are in the role files, execution order is on the task board, and my next prompt can describe the change I want instead of telling an idle agent to keep going.
+But the question I bring to the conversation has changed. Not which model to use, or whether to tell it to continue. Just what I want the team to build.
