@@ -1,5 +1,5 @@
 ---
-description: I stopped switching models mid-conversation and gave Pi named roles, scoped tasks, and a way to keep working.
+description: Give Pi named roles, scoped tasks, and automatic handoffs instead of managing models and prompting agents to continue.
 date: 2026-09-16
 tags: tooling
 draft: true
@@ -7,26 +7,36 @@ draft: true
 
 # Give Pi a Team
 
-I kept using a single model in [Pi](https://pi.dev), even tho I knew it wasn't the right choice for everything. Not because switching models is hard. Because deciding when to switch is another thing to do while I'm trying to get something built.
+I kept using a single model, even tho I knew it wasn't the right thing to do. Not because switching models is hard. Because deciding to switch is another thing to do, while I'm trying to get something built.
 
 Which model was good at planning again? Which one should handle the UI? Has that changed since the last release? And am I really going to interrupt this conversation to change models now?
 
-Usually, no. I'd keep going with whatever was already selected.
+Usually, no. I'd keep going with whatever was already selected. With whatever was already in my context.
 
-The thing I wanted wasn't a better model picker. I wanted to ask an engineer to implement something, or a designer to work on the interface, without remembering which model I'd assigned to each job.
+The thing I wanted wasn't a better model picker. I wanted to ask an engineer to implement something, or a designer to work on the interface, without having to pick a model.
 
-## 1. Roles: Give the Models a Job
+Turns out, this is quite doable. Not that hard even. And you already know the fundamentals: skills & (system) prompts.
 
-That's where [pi-subagents](https://github.com/tintinweb/pi-subagents) comes in. It adds agents with their own instructions, tools, and model selection. Assuming you already have Pi and an authenticated model, install it with:
+## Roles: Give the Models a Job
+
+Subagent sounds fancy. But it's another run of the same kind of agent you're already working with. The main agent hands it a task, it does the work, and returns a result. With [pi-subagents](https://github.com/tintinweb/pi-subagents), you can also ask for one yourself through an `@mention`.
+
+What makes the `@mention` extra useful is the custom profile behind it. Without that, I'd mostly be asking another agent to do the same thing as the main one. With it, `@engineer` gets instructions for implementation, while `@designer` gets instructions for the interface. Each can have its own model, thinking level, and available tools.
+
+The profile is basically a custom system prompt, plus those settings. A skill supplies instructions for a particular kind of work when it's loaded. Neither is a new kind of intelligence. You're giving the model instructions, and deciding when to use them.
+
+That's all we're doing here. Writing down what an engineer or designer should do, then giving those instructions a name we can `@call`.
+
+Let's start with installing pi-subagents. Assuming you already have Pi and an authenticated model, install it with:
 
 ```shell
 pi install npm:@tintinweb/pi-subagents
 mkdir -p ~/.pi/agent/agents
 ```
 
-Use Pi 0.84.0 or newer for the version described here. Restart Pi after installing.
+Restart or `/reload` Pi after installing.
 
-An agent is a Markdown file. Here's a small `~/.pi/agent/agents/engineer.md`:
+Like almost anything with LLM's, an agent profile is a simple markdown file:
 
 ```markdown
 ---
@@ -43,7 +53,7 @@ Run the relevant tests. Report what changed, what passed, and blockers.
 Do not fix adjacent issues just because you noticed them.
 ```
 
-Replace the model with a `provider/modelId` you have authenticated in Pi. It's a choice you make for the role, not a recommendation here. Check `/agents` → Agent types to confirm which model it resolves to.
+Save it as `engineer.md` in  `~/.pi/agent/agents/`. Replace the model with a `provider/modelId` you have authenticated in Pi. It's a choice you make for the role, not a recommendation here. Check `/agents` → Agent types to confirm which model it resolves to.
 
 Now I can type:
 
@@ -84,7 +94,7 @@ Both settings matter. Tasks default to session storage, with cascade disabled. P
 
 These are global defaults. `/tasks` → Settings can override them for a project, saving to `.pi/tasks-config.json`.
 
-The wiring is straightforward: `TaskCreate` assigns an `agentType`, `TaskUpdate` connects prerequisites through `addBlockedBy`, and `TaskExecute` starts ready tasks. Auto-cascade starts dependent tasks when their prerequisites have completed.
+The wiring is straightforward: create a task with an `agentType` through `TaskCreate`, connect its prerequisites through `TaskUpdate` with `addBlockedBy`, and start ready tasks through `TaskExecute`. Auto-cascade starts dependent tasks when their prerequisites have completed.
 
 It's not a background company that keeps inventing work. It's a dependency graph that keeps moving through work you've already described.
 
