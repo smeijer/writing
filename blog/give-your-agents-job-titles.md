@@ -4,6 +4,10 @@ tags: tooling
 date: 2026-09-16
 draft: true
 ---
+> I think we should compare roles with how users already use system prompt customizations, and skills. This is a natural evolution from that. After all, it's all just text.
+> 
+> Also wonder if we should name paperclip.ing and squad.so (99 a month), this does the same, but for free. 
+
 
 # Give Your Agents Job Titles
 
@@ -51,7 +55,9 @@ But something was still wrong, and it took me a while to name it.
 
 **I was still the planner.**
 
-Every piece of work started with me describing it. I'd break a feature into parts in my head, write them out as prose, and hand them over one at a time. The engineer was doing the work, but I was still doing the thinking, and I was doing it badly — in the middle of a conversation, at whatever level of detail I happened to feel like.
+Every piece of work started with me describing it. I'd break a feature into parts in my head, write them out as prose, and hand them over one at a time. The engineer was doing the work, but I was still doing the thinking, ~~and I was doing it badly — in the middle of a conversation, at whatever level of detail I happened to feel like.~~
+
+> it's but about me doing it badly. The cto role does two things. One, breakdown, two, create tasks. The thing the cto fixes, is me needing to say "continue"
 
 I'd also become a message bus. The engineer would finish, I'd read the report, and I'd hand the next thing to the next agent. That's not delegation. That's me with a clipboard.
 
@@ -122,6 +128,7 @@ Then notice how much of your time goes into describing what to do next. That's y
 
 I built the whole company because I wanted `@engineer` to work. Turns out the roles were the easy part. The hard part was admitting that most of what I was doing wasn't work — it was routing.
 
+> I didn't build a whole company. I build a team. Let's not call it company, it's a team. A team of agents. 
 ---
 
 _It's the same lesson as [the perfect stack is two](/articles/the-perfect-stack-is-two/): a few small tools, each genuinely good at one thing, beat one thing that claims to do everything. It just turns out that's true of the things doing the work, too._
