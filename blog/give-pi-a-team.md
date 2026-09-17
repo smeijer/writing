@@ -1,8 +1,7 @@
 ---
 description: Give Pi named roles, scoped tasks, and automatic handoffs instead of managing models and prompting agents to continue.
-date: 2026-09-16
+date: 2026-09-17
 tags: tooling
-draft: true
 ---
 
 # Give Pi a Team
@@ -17,7 +16,7 @@ The thing I wanted wasn't a better model picker. I wanted to ask an engineer to 
 
 Turns out, this is quite doable. Not that hard even. And you already know the fundamentals: skills & (system) prompts.
 
-## Roles: Give the Models a Job
+## Give the Models a Role
 
 Subagent sounds fancy. But it's just another run of the same kind of agent you're already working with. The main agent hands it a task, it does the work, and returns a result. With [pi-subagents](https://github.com/tintinweb/pi-subagents), you can also ask for one yourself through an `@mention`.
 
@@ -71,7 +70,7 @@ For a designer, create `designer.md` using the same format. Change `name` to `de
 
 Instead of switching models, I talk to `@engineer` or `@designer`. The chat feels more natural, and the handover contains only the context that role needs. I don't need to clear my session through `/new` all the time.
 
-## Tasks: Keep the Work Moving
+## Keep the Work Moving
 
 Roles solved the model-switching problem. They didn't solve the next problem: I still had to tell the agents, "continue".
 
@@ -152,7 +151,7 @@ With `prompt_mode: append`, the engineer keeps system instructions and project c
 
 This doesn't guarantee correct work, and it isn't an autonomous team. But it does keep agents progressing through work the CTO already described. I can come back from a coffee break to results or a blocker, instead of an invitation to say “continue”.
 
-## Routing: Direct the Team
+## Steer the Team
 
 The remaining piece is routing. Add this to `~/.pi/agent/AGENTS.md`, preserving your existing instructions:
 
@@ -192,7 +191,7 @@ The CTO returns a scoped plan. The main agent starts it. Dependent work follows 
 
 Normal completion of an agent run through `TaskExecute` marks its task completed. That doesn't mean the tests passed. The extension doesn't interpret “I'm blocked” in the response or verify acceptance criteria, so I still need to inspect the results.
 
-## A Team: Not Another Platform
+## A Team, Not Another Platform
 
 What I wanted from tools like [Paperclip](https://paperclip.ing) and [Squad](https://squad.so) was the team and the cascade. Not everything those products offer. Just named roles, scoped work, and tasks that start when their prerequisites are done.
 
