@@ -36,13 +36,7 @@ mkdir -p ~/.pi/agent/agents
 
 Restart or `/reload` Pi after installing.
 
-First, list the model IDs available to you:
-
-```shell
-pi --list-models
-```
-
-Now let's create our first (sub)agent. Like almost anything with LLMs, an agent profile is a simple markdown file. This profile uses `deepseek/deepseek-v4-flash` because that's the model I chose for this role. It's only an example, not a recommendation. Replace it with an available `provider/modelId` from the list. Save it as `~/.pi/agent/agents/engineer.md`.
+Now let's create our first (sub)agent. Like almost anything with LLMs, an agent profile is a simple markdown file. This profile uses `deepseek/deepseek-v4-flash` because that's the model I chose for this role. Save it as `~/.pi/agent/agents/engineer.md`.
 
 ```markdown
 ---
@@ -59,15 +53,15 @@ Run the relevant tests. Report what changed, what passed, and blockers.
 Do not fix adjacent issues just because you noticed them.
 ```
 
-Let's go through the YAML frontmatter:
+Let's go through the frontmatter:
 
 - `name` is the thing you can mention. In this case, `@engineer`. I recommend keeping it in sync with the filename.
-- `model` picks the provider and model for this role, using `provider/modelId`.
-- `tools` limits the built-in tools the engineer can use.
+- `model` picks the provider and model for this role, using `provider/model`. List available models with `pi --list-models`
+- `tools` limits the built-in tools the engineer can use. See [pi.dev](https://pi.dev/docs/latest/sdk#tools) for available tools.
 - `prompt_mode: append` adds these instructions to Pi's normal agent prompt instead of replacing it.
 - `inherit_context: false` starts the agent without the entire parent conversation. It still gets its own instructions and the project context that applies to it.
 
-Trigger `/reload` after saving this file, then open `/agents` → Agent types. You should see `engineer` and the model Pi resolved for it. As an optional check, type `@eng` and mention completion should suggest `@engineer`.
+Trigger `/reload` after saving this file, then open `/agents` → Agent types. You should see `engineer` and the model Pi resolved for it. Or alternatively, type `@eng` and completion should suggest `@engineer`.
 
 After this, I can type:
 
@@ -75,11 +69,11 @@ After this, I can type:
 @engineer Add tests for the CSV parser's empty-input behavior.
 ```
 
-For a designer, create `designer.md` using the same format. Change `name` to `designer`, pick a model that's better suited for UI work (for example `openai-codex/gpt-6-astra`), describe its presentation work, and replace the body with instructions to own layout, interaction, and component interfaces. Choose its model separately.
+For a designer, create `designer.md` using the same format. Change `name` to `designer`, pick a model that's better suited for UI work (for example `openai-codex/gpt-6-astra`), describe its presentation work, and replace the body with instructions to own layout, interaction, and component interfaces. 
 
 Instead of switching models, I talk to `@engineer` or `@designer`. The result is the same, it's just the chat that feels more natural. Bonus point is that there's no context handover, without me needing to clear my session trough `/new` all the time.
 
-## Tasks: Stop Being the Continue Button
+## Tasks: Stop Asking to Continue
 
 Roles solved the model-switching problem. They didn't solve the next problem: I still had to tell the agents; "continue".
 
@@ -102,7 +96,7 @@ Create or merge this into `~/.pi/agent/tasks-config.json`:
 
 Restart or `/reload` Pi after saving the config.
 
-Both settings matter. Tasks default to session storage, with cascade disabled. Project storage gives the CTO and main agent the same board at `.pi/tasks/tasks.json`. Otherwise, the planner can create tasks the main agent cannot see.
+Both settings matter. Tasks default to session storage, with cascade disabled. Project storage puts the board at `.pi/tasks/tasks.json`, where agents with access to the task tools can share it. With session storage, a subagent can create tasks the main agent cannot see.
 
 These are global defaults. `/tasks` → Settings can override them for a project, saving to `.pi/tasks-config.json`.
 
