@@ -1,16 +1,15 @@
 ---
+title: Isomorphic Development
 description: Fullstack development, or rather isomorphic development, isn't as easy as they say.
 date: 2023-05-25
 tags: thoughts
 ---
 
-# Isomorphic Development
-
 At first, I wanted to name this post "No, Server Components Don't Make Your Job Easier", but that wouldn't have covered it. It's not server components itself complicating our jobs. It's the isomorphic nature of it. The fact that the same code runs in both server and client, and that they're supposed to bridge the gap between them. Supposed to, because we're not there yet.
 
 Sure, server components will make your react components look simpler. That's because server components come with strict regulations. Don't use hooks, or client state. Don't make them interactive. Guess how complex your client side react components would look, if you'd follow the same rules? Exactly, they'd look simpler too.
 
-Every time someone tries to sell me the idea that moving code to the server makes our lives easier, they fail to explain how. With server components some go as far as saying tthat not seeing how they simplify stuff, "is the same resistance we showed against JSX years ago", and that "we just need to adapt our mental model". I can tell you, it's not. Moving anything from client to server, is nothing like moving from HTML or `createElement` to JSX.
+Every time someone tries to sell me the idea that moving code to the server makes our lives easier, they fail to explain how. With server components some go as far as saying that not seeing how they simplify stuff, "is the same resistance we showed against JSX years ago", and that "we just need to adapt our mental model". I can tell you, it's not. Moving anything from client to server, is nothing like moving from HTML or `createElement` to JSX.
 
 I've been writing isomorphic code since Meteor.js was released back in 2012. So I want to be clear that I'm not against fullstack development, and I'm not even against isomorphic development, as I fully embrace its benefits. What I am against, is the false claim that moving parts of our code to the server, would make the job of a frontend developer easier.
 
