@@ -23,9 +23,7 @@ Subagent sounds fancy. But it's just another run of the same kind of agent you'r
 
 What makes the `@mention` extra useful is the custom profile behind it. Without that, I'd mostly be asking another agent to do the same thing as the main one. With it, `@engineer` gets instructions for implementation, while `@designer` gets instructions for the interface. Each can have its own model, thinking level, and available tools.
 
-The profile is basically a custom system prompt, plus those settings. A skill supplies instructions for a particular kind of work when it's loaded. Neither is a new kind of intelligence. You're giving the model instructions, and deciding when to use them.
-
-That's all we're doing here. Writing down what an engineer or designer should do, then giving those instructions a name we can `@call`.
+The profile is basically a custom system prompt, plus settings. Skills add task-specific instructions when loaded. Neither adds new intelligence. We're writing down what an engineer or designer should do, then giving those instructions a name we can `@call`.
 
 Let's start with installing pi-subagents. Assuming you already have Pi and an authenticated model, install it with:
 
@@ -71,9 +69,9 @@ After this, I can type:
 
 For a designer, create `designer.md` using the same format. Change `name` to `designer`, pick a model that's better suited for UI work (for example `openai-codex/gpt-6-astra`), describe its presentation work, and replace the body with instructions to own layout, interaction, and component interfaces. 
 
-Instead of switching models, I talk to `@engineer` or `@designer`. The result is the same, it's just the chat that feels more natural. Bonus point is that there's no context handover, without me needing to clear my session trough `/new` all the time.
+Instead of switching models, I talk to `@engineer` or `@designer`. The chat feels more natural, and the handover contains only the context that role needs. I don't need to clear my session through `/new` all the time.
 
-## Tasks: Stop Asking to Continue
+## Tasks: Keep the Work Moving
 
 Roles solved the model-switching problem. They didn't solve the next problem: I still had to tell the agents, "continue".
 
@@ -154,7 +152,7 @@ With `prompt_mode: append`, the engineer keeps system instructions and project c
 
 This doesn't guarantee correct work, and it isn't an autonomous team. But it does keep agents progressing through work the CTO already described. I can come back from a coffee break to results or a blocker, instead of an invitation to say “continue”.
 
-## Routing: Keep the Main Conversation Out of Implementation
+## Routing: Direct the Team
 
 The remaining piece is routing. Add this to `~/.pi/agent/AGENTS.md`, preserving your existing instructions:
 
