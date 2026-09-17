@@ -75,11 +75,15 @@ Instead of switching models, I talk to `@engineer` or `@designer`. The result is
 
 ## Tasks: Stop Asking to Continue
 
-Roles solved the model-switching problem. They didn't solve the next problem: I still had to tell the agents; "continue".
+Roles solved the model-switching problem. They didn't solve the next problem: I still had to tell the agents, "continue".
 
-Sounds familiar? Some work get's done, but the agent ends with "just say continue and I get that done too". Exhausting. You come back from your coffee break, and that's the message you're running in to. 
+Sounds familiar? Some work gets done, but the agent ends with "just say continue and I'll get that done too". Exhausting. You come back from your coffee break, and that's the message you're running into.
 
-[pi-tasks](https://github.com/tintinweb/pi-tasks) adds the missing task list and dependencies:
+My solution is to introduce a CTO and give it a task system. The CTO inspects the repository and breaks my goal into scoped tasks. The task board stores their dependencies and keeps the handoffs moving.
+
+These two need each other. A CTO without a task system returns a plan I still have to advance. A task list without a CTO means I have to write every task by hand.
+
+[pi-tasks](https://github.com/tintinweb/pi-tasks) provides that shared task board and its dependencies. Install it with:
 
 ```shell
 pi install npm:@tintinweb/pi-tasks
@@ -100,15 +104,7 @@ Both settings matter. Tasks default to session storage, with cascade disabled. P
 
 These are global defaults. `/tasks` → Settings can override them for a project, saving to `.pi/tasks-config.json`.
 
-The wiring is straightforward: create a task with an `agentType` through `TaskCreate`, connect its prerequisites through `TaskUpdate` with `addBlockedBy`, and start ready tasks through `TaskExecute`. Auto-cascade starts dependent tasks when their prerequisites have completed.
-
-It's not a background company that keeps inventing work. It's a dependency graph that keeps moving through work you've already described.
-
-## 3. Planning: Give the Engineer Less to Read
-
-I don't want to write every task myself either. That's the CTO's job. It inspects the repo, breaks the goal into tasks, and gives each one exact files and the context needed to do the work. The engineer shouldn't need our whole conversation to implement one change.
-
-Create `~/.pi/agent/agents/cto.md`:
+That gives the CTO somewhere to record the plan. It doesn't create the plan or start the work by itself. Create `~/.pi/agent/agents/cto.md`:
 
 ```markdown
 ---
@@ -122,7 +118,7 @@ inherit_context: false
 ---
 
 Plan; never implement or start execution. Read the repository,
-its AGENTS.md/CLAUDE.md, and relevant build and source files first.
+its AGENTS.md, and relevant build and source files first.
 Check TaskList before creating work.
 
 Use TaskCreate for small tasks that can finish in one run.
@@ -137,12 +133,14 @@ Assume the worker has not seen this planning conversation.
 
 Again, choose your own authenticated model. The `ext:pi-tasks` selector exposes the installed extension's tools; `disallowed_tools` removes execution and stopping from this role.
 
-The CTO plans; it cannot call `TaskExecute`. The main agent starts the ready tasks through that tool, and auto-cascade handles the dependents when tracked execution completes. Creating tasks, manually marking one completed, or spawning a plain `Agent` doesn't start the cascade.
+The split is deliberate. The CTO inspects the repository, creates tasks with an `agentType` through `TaskCreate`, and connects prerequisites through `TaskUpdate` with `addBlockedBy`. It cannot call `TaskExecute`. The main agent starts the initial ready tasks through that tool. When tracked `TaskExecute` runs complete, auto-cascade launches their dependents.
 
-The task descriptions matter more than the title “CTO”. “Fix CSV importing” isn't a handoff. Something like this is:
+Creating a task doesn't bootstrap the cascade. Neither does manually marking one completed or spawning a plain `Agent`. The first ready tasks must go through `TaskExecute`.
+
+The task descriptions matter more than the title "CTO". "Fix CSV importing" isn't a handoff. Something like this is:
 
 ```text
-Allowed files: src/import/parse.ts, test/import/parse.test.ts.
+Allowed files: src/import/parse.ts, src/import/parse.test.ts.
 Return an empty array for empty or whitespace-only input.
 Preserve the existing result for valid CSV.
 Acceptance: add regression tests; existing parser tests still pass.
@@ -150,11 +148,13 @@ Acceptance: add regression tests; existing parser tests still pass.
 
 Those filenames are an example; the planner must use the actual repository. It should split a larger change into several tasks, not send an engineer a whole project with a reassuring title.
 
-Sure, I could prepare those handoffs myself. But that's the part I don't want to keep doing by hand. The engineer needs the decisions we made, not every option we decided against.
+Sure, I could prepare those handoffs myself. But that's the part I don't want to keep doing by hand. The engineer needs the decisions we made, not every option we decided against. Smaller tasks also mean smaller contexts for each engineer.
 
 With `prompt_mode: append`, the engineer keeps system instructions and project conventions alongside its role instructions. With `inherit_context: false`, it doesn't inherit the entire parent chat. Cascaded tasks also receive their prerequisites' stored results. _Focused context, not no context._
 
-## 4. Routing: Keep the Main Conversation Out of Implementation
+This doesn't guarantee correct work, and it isn't an autonomous team. But it does keep agents progressing through work the CTO already described. I can come back from a coffee break to results or a blocker, instead of an invitation to say “continue”.
+
+## Routing: Keep the Main Conversation Out of Implementation
 
 The remaining piece is routing. Add this to `~/.pi/agent/AGENTS.md`, preserving your existing instructions:
 
@@ -179,11 +179,9 @@ For follow-up findings, I also give the engineer limited access to the task boar
 tools: read, write, edit, bash, grep, find, ls, ext:pi-tasks/TaskCreate, ext:pi-tasks/TaskList
 ```
 
-Using `ext:` makes extension access an explicit allowlist, so keep any other extension tools your engineer needs on that line.
+And append this instruction to the engineer's body: "_File unrelated findings with TaskCreate as pending tasks without agentType; do not fix them._" It can record the finding, but the main agent decides what gets scheduled next.
 
-Append this instruction to the engineer's body: “File unrelated findings with TaskCreate as pending tasks without agentType; do not fix them.” It can record the finding, but the main agent decides what gets scheduled next.
-
-These instructions are workflow rules, not a security sandbox. File scopes still need review, and an agent with shell access can change files through the shell.
+Note that these instructions are workflow rules, not a security sandbox. File scopes still need review, and an agent with shell access can change files through the shell, even when they lack the `write` tool.
 
 Restart Pi after the setup, open your repository, and give the CTO a goal:
 
